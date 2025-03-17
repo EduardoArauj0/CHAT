@@ -1,12 +1,18 @@
 // login elements
 
 const login = document.querySelector('.Login')
-const loginForm = document.querySelector('.Login__form')
-const loginInput = document.querySelector('.Login__input')
+const loginForm = login.querySelector('.Login__form')
+const loginInput = login.querySelector('.Login__input')
+
+// chat elements
+
+const chat = document.querySelector('.Chat')
+const chatForm = chat.querySelector('.Chat__form')
+const chatInput = chat.querySelector('.Chat__input')
 
 const colors = [
     "cadetblue",
-    "darkgodenrod",
+    "darkgoldenrod",
     "cornflowerblue",
     "darkkhaki",
     "hotpink",
@@ -26,6 +32,9 @@ const handleSubmit = (event) => {
     user.id = crypto.randomUUID()
     user.name = loginInput.value 
     user.color = getRandomColor()   
+
+    login.style.display = "none"
+    chat.style.display = "flex"
 
     console.log(user)
 }
