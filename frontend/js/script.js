@@ -28,7 +28,7 @@ const getRandomColor = () => {
 }
 
 const processMessage = ({data}) => {
-    alert(data)
+    const {userId, userColor, userName,  content } = JSON.parse(data)
 }
 
 const handleLogin = (event) => {
@@ -45,4 +45,20 @@ const handleLogin = (event) => {
     websocket.onmessage = processMessage
 }
 
+const sendMessage = (event) => {
+    event.preventDefault()
+
+    const message = {
+        userId: user.id,
+        userName: user.name,
+        userColor: user.color,
+        content: chatInput.value
+    }
+
+    websocket.send(JSON.stringify(message))
+
+    chatInput.value = ''
+}
+
 loginForm.addEventListener('submit', handleLogin)
+chatForm.addEventListener('submit', sendMessage)
