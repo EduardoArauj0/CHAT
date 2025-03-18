@@ -18,15 +18,20 @@ const colors = [
     "hotpink",
     "gold"
 ]   
+const user = { id: '', name: '', color: ''}
+
+let websocket
 
 const getRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * colors.length)
     return colors[randomIndex]
 }
 
-const user = { id: '', name: '', color: ''}
+const processMessage = ({data}) => {
+    alert(data)
+}
 
-const handleSubmit = (event) => {
+const handleLogin = (event) => {
     event.preventDefault()
 
     user.id = crypto.randomUUID()
@@ -36,7 +41,8 @@ const handleSubmit = (event) => {
     login.style.display = "none"
     chat.style.display = "flex"
 
-    console.log(user)
+    websocket = new WebSocket("ws://localhost:8080")
+    websocket.onmessage = processMessage
 }
 
-loginForm.addEventListener('submit', handleSubmit)
+loginForm.addEventListener('submit', handleLogin)
