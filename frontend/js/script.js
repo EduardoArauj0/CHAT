@@ -9,6 +9,7 @@ const loginInput = login.querySelector('.Login__input')
 const chat = document.querySelector('.Chat')
 const chatForm = chat.querySelector('.Chat__form')
 const chatInput = chat.querySelector('.Chat__input')
+const chatMessages = chat.querySelector('.Chat__messages')
 
 const colors = [
     "cadetblue",
@@ -22,6 +23,15 @@ const user = { id: '', name: '', color: ''}
 
 let websocket
 
+const creatMessageSelfElement = (content) => {
+    const div = document.createElement("div")
+
+    div.classList.add('Message--self')
+    div.innerHTML = content
+
+    return div
+}
+
 const getRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * colors.length)
     return colors[randomIndex]
@@ -29,6 +39,10 @@ const getRandomColor = () => {
 
 const processMessage = ({data}) => {
     const {userId, userColor, userName,  content } = JSON.parse(data)
+
+    const element = creatMessageSelfElement(content)
+
+    chatMessages.appendChild(element)
 }
 
 const handleLogin = (event) => {
