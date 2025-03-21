@@ -54,6 +54,13 @@ const getRandomColor = () => {
     return colors[randomIndex]
 }
 
+const scrollScreen = () => {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    })   
+}
+
 const processMessage = ({data}) => {
     const {userId, userColor, userName,  content } = JSON.parse(data)
 
@@ -62,6 +69,8 @@ const processMessage = ({data}) => {
     : creatMessageOtherElement(content,userName, userColor)
 
     chatMessages.appendChild(message)
+
+    scrollScreen()
 }
 
 const handleLogin = (event) => {
