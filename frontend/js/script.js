@@ -32,6 +32,23 @@ const creatMessageSelfElement = (content) => {
     return div
 }
 
+const creatMessageOtherElement = (content, sender, senderColor) => {
+    const div = document.createElement("div")
+    const span = document.createElement("span")
+
+    div.classList.add('Message--other')
+
+    div.classList.add('Message--self')
+    span.classList.add('Message--sender')
+    span.style.color = senderColor
+
+    div.appendChild(span)
+    span.innerHTML = sender
+    div.innerHTML += content
+
+    return div
+}
+
 const getRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * colors.length)
     return colors[randomIndex]
@@ -40,7 +57,7 @@ const getRandomColor = () => {
 const processMessage = ({data}) => {
     const {userId, userColor, userName,  content } = JSON.parse(data)
 
-    const element = creatMessageSelfElement(content)
+    const element = creatMessageOtherElement(content, user)
 
     chatMessages.appendChild(element)
 }
