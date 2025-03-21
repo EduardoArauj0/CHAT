@@ -57,9 +57,11 @@ const getRandomColor = () => {
 const processMessage = ({data}) => {
     const {userId, userColor, userName,  content } = JSON.parse(data)
 
-    const element = creatMessageOtherElement(content, user)
+    const message = userId == user.id 
+    ? creatMessageSelfElement(content)
+    : creatMessageOtherElement(content,userName, userColor)
 
-    chatMessages.appendChild(element)
+    chatMessages.appendChild(message)
 }
 
 const handleLogin = (event) => {
